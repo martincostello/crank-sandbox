@@ -16,11 +16,11 @@
       "onAutoForward": "silent"
     },
     "5001": {
-      "label": "CHANGE_ME",
+      "label": "CrankSandbox",
       "onAutoForward": "openBrowserOnce"
     }
   },
-  "postCreateCommand": "./build.ps1 -SkipTests",
+  "postCreateCommand": "./build.ps1",
   "remoteEnv": {
     "DOTNET_ROLL_FORWARD": "Major",
     "PATH": "/root/.dotnet/tools:${containerWorkspaceFolder}/.dotnetcli:${containerEnv:PATH}"

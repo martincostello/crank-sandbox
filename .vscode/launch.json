@@ -2,13 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch CHANGE_ME",
+      "name": "Launch CrankSandbox",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/CHANGE_ME/bin/Debug/net6.0/CHANGE_ME.dll",
+      "program": "${workspaceFolder}/src/CrankSandbox/bin/Debug/net6.0/CrankSandbox.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/CHANGE_ME",
+      "cwd": "${workspaceFolder}/src/CrankSandbox",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
@@ -18,20 +18,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "${env:CODESPACES}"
       }
-    },
-    {
-      "name": "Run tests",
-      "type": "coreclr",
-      "request": "launch",
-      "preLaunchTask": "build",
-      "program": "dotnet",
-      "args": [
-        "test"
-      ],
-      "cwd": "${workspaceFolder}/tests/CHANGE_ME.Tests",
-      "console": "internalConsole",
-      "stopAtEntry": false,
-      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }

@@ -5,8 +5,7 @@
 
 param(
     [Parameter(Mandatory = $false)][string] $Configuration = "Release",
-    [Parameter(Mandatory = $false)][string] $OutputPath = "",
-    [Parameter(Mandatory = $false)][switch] $SkipTests
+    [Parameter(Mandatory = $false)][string] $OutputPath = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -85,39 +84,6 @@ function DotNetPack {
         throw "dotnet pack failed with exit code $LASTEXITCODE"
     }
 }
-
-function DotNetTest {
-    param([string]$Project)
-
-    $additionalArgs = @()
-
-    if (![string]::IsNullOrEmpty($env:GITHUB_SHA)) {
-        $additionalArgs += "--logger"
-        $additionalArgs += "GitHubActions;report-warnings=false"
-    }
-
-    & $dotnet test $Project --output $OutputPath --configuration $Configuration $additionalArgs
-
-    if ($LASTEXITCODE -ne 0) {
-        throw "dotnet test failed with exit code $LASTEXITCODE"
-    }
-
-    $nugetPath = $env:NUGET_PACKAGES ?? (Join-Path ($env:USERPROFILE ?? "~") ".nuget" "packages")
-    $propsFile = Join-Path $solutionPath "Directory.Packages.props"
-    $reportGeneratorVersion = (Select-Xml -Path $propsFile -XPath "//PackageVersion[@Include='ReportGenerator']/@Version").Node.'#text'
-    $reportGeneratorPath = Join-Path $nugetPath "reportgenerator" $reportGeneratorVersion "tools" "net6.0" "ReportGenerator.dll"
-
-    $coverageOutput = Join-Path $OutputPath "coverage.cobertura.xml"
-    $reportOutput = Join-Path $OutputPath "coverage"
-
-    & $dotnet `
-        $reportGeneratorPath `
-        `"-reports:$coverageOutput`" `
-        `"-targetdir:$reportOutput`" `
-        -reporttypes:HTML `
-        -verbosity:Warning
-}
-
 function DotNetPublish {
     param([string]$Project)
 
@@ -130,15 +96,11 @@ function DotNetPublish {
 }
 
 $packageProjects = @(
-    (Join-Path $solutionPath "src" "CHANGE_ME" "CHANGE_ME.csproj")
+    (Join-Path $solutionPath "src" "CrankSandbox" "CrankSandbox.csproj")
 )
 
 $publishProjects = @(
-    (Join-Path $solutionPath "src" "CHANGE_ME" "CHANGE_ME.csproj")
-)
-
-$testProjects = @(
-    (Join-Path $solutionPath "tests" "CHANGE_ME.Tests" "CHANGE_ME.Tests.csproj")
+    (Join-Path $solutionPath "src" "CrankSandbox" "CrankSandbox.csproj")
 )
 
 Write-Host "Publishing solution..." -ForegroundColor Green
@@ -149,11 +111,4 @@ ForEach ($project in $publishProjects) {
 Write-Host "Packaging libraries..." -ForegroundColor Green
 ForEach ($project in $packageProjects) {
     DotNetPack $project $Configuration
-}
-
-if ($SkipTests -eq $false) {
-    Write-Host "Testing $($testProjects.Count) project(s)..." -ForegroundColor Green
-    ForEach ($project in $testProjects) {
-        DotNetTest $project
-    }
 }
