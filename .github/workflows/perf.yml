@@ -1,0 +1,45 @@
+name: perf
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - '**/*.md'
+    - '**/*.gitignore'
+    - '**/*.gitattributes'
+  #pull_request:
+  #  branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  perf:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+
+    - name: Install crank
+      shell: pwsh
+      run: |
+        dotnet tool install --global Microsoft.Crank.Controller --version "0.2.0-*"
+        dotnet tool install --global Microsoft.Crank.Agent --version "0.2.0-*"
+
+    - name: Run crank
+      shell: pwsh
+      run: ./perf.ps1
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: true
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+        NUGET_XMLDOC_MODE: skip
