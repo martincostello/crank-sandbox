@@ -5,7 +5,8 @@
 
 param(
     [Parameter(Mandatory = $false)][string] $Configuration = "Release",
-    [Parameter(Mandatory = $false)][string] $OutputPath = ""
+    [Parameter(Mandatory = $false)][string] $OutputPath = "",
+    [Parameter(Mandatory = $false)][switch] $InstallDotNetSdkLocally
 )
 
 $ErrorActionPreference = "Stop"
@@ -20,7 +21,7 @@ if ($OutputPath -eq "") {
     $OutputPath = Join-Path "$(Convert-Path "$PSScriptRoot")" "artifacts"
 }
 
-$installDotNetSdk = $false;
+$installDotNetSdk = $InstallDotNetSdkLocally;
 
 if (($null -eq (Get-Command "dotnet" -ErrorAction SilentlyContinue)) -and ($null -eq (Get-Command "dotnet.exe" -ErrorAction SilentlyContinue))) {
     Write-Host "The .NET SDK is not installed."
@@ -42,7 +43,7 @@ else {
 
 if ($installDotNetSdk -eq $true) {
 
-    $env:DOTNET_INSTALL_DIR = Join-Path "$(Convert-Path "$PSScriptRoot")" ".dotnetcli"
+    $env:DOTNET_INSTALL_DIR = Join-Path "$(Convert-Path "$PSScriptRoot")" ".dotnet"
     $sdkPath = Join-Path $env:DOTNET_INSTALL_DIR "sdk" "$dotnetVersion"
 
     if (!(Test-Path $sdkPath)) {
@@ -91,4 +92,8 @@ $publishProjects = @(
 Write-Host "Publishing solution..." -ForegroundColor Green
 ForEach ($project in $publishProjects) {
     DotNetPublish $project $Configuration
+}
+
+if ($null -ne $env:GITHUB_ACTIONS) {
+    & $dotnet build-server shutdown 2>&1 | Out-Null
 }

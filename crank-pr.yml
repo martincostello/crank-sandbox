@@ -1,8 +1,7 @@
 components:
   sandbox:
     script: |
-      dotnet build --configuration Release
-      dotnet build-server shutdown
+      pwsh build.ps1 -InstallDotNetSdkLocally
     arguments: ""
 
 defaults: --config ./crank.yml
