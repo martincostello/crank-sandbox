@@ -21,9 +21,4 @@ $config = Join-Path $repoPath "crank.yml"
 
 $agent = crank-agent &
 
-try {
-    crank --config $config --scenario $Scenario --profile $Profile $additionalArgs
-}
-finally {
-    Remove-Job -Job $agent -Force
-}
+crank --config $config --scenario $Scenario --profile $Profile $additionalArgs
