@@ -5,6 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", async () =>
+{
+    await Task.Delay(TimeSpan.FromSeconds(1));
+    return "Hello World!";
+});
 
 app.Run();
