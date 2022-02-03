@@ -24,7 +24,6 @@ $agent = crank-agent &
 try {
     crank --config $config --scenario $Scenario --profile $Profile $additionalArgs
 }
-catch {
-    Stop-Job -InstanceId $agent.InstanceId
-    Wait-Job -InstanceId $agent.InstanceId
+finally {
+    Remove-Job -Job $agent -Force
 }
