@@ -1,11 +1,11 @@
 components:
   sandbox:
     script: |
-      call ./build.ps1
-      call dotnet build-server shutdown
+      dotnet build --configuration Release
+      dotnet build-server shutdown
     arguments: ""
 
-defaults: --config ./crank-pr.yml
+defaults: --config ./crank.yml
 
 profiles:
   local:
@@ -15,4 +15,4 @@ profiles:
 benchmarks:
   root:
     description: Root
-    arguments: --config ./crank-pr.yml --scenario root
+    arguments: --config ./crank.yml --scenario root

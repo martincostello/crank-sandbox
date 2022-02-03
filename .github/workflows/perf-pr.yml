@@ -37,7 +37,7 @@ jobs:
     - name: Run crank
       shell: pwsh
       run: |
-        crank-pr --config .\crank-pr.yml --pull-request ${{ github.event.issue.number }} --benchmarks root --profiles local --components sandbox
+        crank-pr --config ./crank-pr.yml --repository https://github.com/${{ github.repository }} --pull-request ${{ github.event.number }} --benchmarks root --profiles local --components sandbox
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
         DOTNET_NOLOGO: true
