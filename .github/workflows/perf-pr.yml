@@ -1,4 +1,4 @@
-name: perf
+name: perf-pr
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  perf:
+  perf-pr:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
@@ -32,7 +32,7 @@ jobs:
       run: |
         dotnet tool install --global Microsoft.Crank.Controller --version "0.2.0-*"
         dotnet tool install --global Microsoft.Crank.Agent --version "0.2.0-*"
-        dotnet tool install --global Microsoft.PullRequestBot --version "0.2.0-*"
+        dotnet tool install --global Microsoft.Crank.PullRequestBot --version "0.2.0-*"
 
     - name: Run crank
       shell: pwsh
