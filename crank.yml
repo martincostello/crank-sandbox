@@ -8,11 +8,24 @@ jobs:
       branchOrCommit: main
       project: src/CrankSandbox/CrankSandbox.csproj
     readyStateText: Application started.
+  local:
+    source:
+      localFolder: src/CrankSandbox
+      project: CrankSandbox.csproj
+    readyStateText: Application started.
 
 scenarios:
   root:
     application:
       job: server
+    load:
+      job: bombardier
+      variables:
+        serverPort: 5000
+        path: /
+  root-local:
+    application:
+      job: local
     load:
       job: bombardier
       variables:
