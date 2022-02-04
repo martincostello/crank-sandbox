@@ -61,7 +61,7 @@ jobs:
           const arguments = regex.exec(context.payload.comment.body);
 
           // Generate help text with all available commands
-          if (arguments == null || arguments.length < 2 || !availableProfiles.hasOwnProperty(arguments[1])) {
+          if (arguments == null || arguments.length < 2 || !availableBenchmarks.hasOwnProperty(arguments[1])) {
 
               var body = 'The `/benchmark` command accepts these benchmarks:\n';
               for (var key in availableBenchmarks) {
