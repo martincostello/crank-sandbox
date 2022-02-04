@@ -25,7 +25,7 @@ jobs:
         script: |
           // Documents all available commands
           const availableBenchmarks = {
-            "root": "Runs root profile"
+            "root": "Runs root benchmark"
           };
 
           // Verify the user is a collaborator
