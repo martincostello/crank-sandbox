@@ -10,7 +10,12 @@ param(
     [Parameter(Mandatory = $true)][string] $AccessToken
 )
 
-Start-Process -FilePath "crank-agent" -WindowStyle Hidden | Out-Null
+if ($IsWindows) {
+    Start-Process -FilePath "crank-agent" -WindowStyle Hidden | Out-Null
+} else {
+    Start-Process -FilePath "crank-agent" | Out-Null
+}
+
 Start-Sleep -Seconds 2
 
 $repoPath = Split-Path $MyInvocation.MyCommand.Definition

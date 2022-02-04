@@ -19,7 +19,12 @@ if (![string]::IsNullOrEmpty($BranchOrCommitOrTag)) {
 $repoPath = Split-Path $MyInvocation.MyCommand.Definition
 $config = Join-Path $repoPath "crank.yml"
 
-$agent = Start-Process -FilePath "crank-agent" -PassThru
+if ($IsWindows) {
+    $agent = Start-Process -FilePath "crank-agent" -WindowStyle Hidden -PassThru
+} else {
+    $agent = Start-Process -FilePath "crank-agent" -PassThru
+}
+
 Start-Sleep -Seconds 2
 
 try {
