@@ -37,7 +37,8 @@ jobs:
     - name: Run crank
       shell: pwsh
       run: |
-        $agent = crank-agent &
+        Start-Process -FilePath "crank-agent" -WindowStyle Hidden | Out-Null
+        Start-Sleep -Seconds 2
         crank-pr --config ./crank-pr.yml --repository https://github.com/${{ github.repository }} --pull-request ${{ github.event.number }} --benchmarks root --profiles local --components sandbox --publish-results true --access-token ${{ secrets.GITHUB_TOKEN }}
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
