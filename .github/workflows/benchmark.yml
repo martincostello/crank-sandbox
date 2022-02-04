@@ -40,7 +40,7 @@ jobs:
               username: commentUser
             });
           } catch (error) {
-            var message = `Error: @${comment_user} is not a repo collaborator, benchmarking is not allowed.`;
+            var message = `Error: @${commentUser} is not a repo collaborator, benchmarking is not allowed.`;
             await github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -50,7 +50,7 @@ jobs:
             throw message;
           }
 
-          core.info(`Verified ${comment_user} is a repo collaborator.`);
+          core.info(`Verified ${commentUser} is a repo collaborator.`);
 
           if (context.eventName !== "issue_comment") {
             throw "Error: This action only works on issue_comment events.";
