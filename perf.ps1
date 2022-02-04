@@ -19,6 +19,12 @@ if (![string]::IsNullOrEmpty($BranchOrCommitOrTag)) {
 $repoPath = Split-Path $MyInvocation.MyCommand.Definition
 $config = Join-Path $repoPath "crank.yml"
 
-$agent = crank-agent &
+$agent = Start-Process -FilePath "crank-agent" -PassThru -WindowStyle Hidden
+Start-Sleep -Seconds 2
 
-crank --config $config --scenario $Scenario --profile $Profile $additionalArgs
+try {
+    crank --config $config --scenario $Scenario --profile $Profile $additionalArgs
+}
+finally {
+    Stop-Process -InputObject $agent -Force | Out-Null
+}
