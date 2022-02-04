@@ -106,7 +106,7 @@ jobs:
 
     - name: Run crank
       shell: pwsh
-      run: ./benchmark.ps1 -Benchmark ${{ steps.benchmark-argument.outputs.result }} -Repository https://github.com/${{ github.repository }} -PullRequestId ${{ github.event.number }} -AccessToken ${{ secrets.GITHUB_TOKEN }}
+      run: ./benchmark.ps1 -Benchmark ${{ steps.benchmark-argument.outputs.result }} -Repository https://github.com/${{ github.repository }} -PullRequestId ${{ github.event.issue.number }} -AccessToken ${{ secrets.GITHUB_TOKEN }}
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
         DOTNET_NOLOGO: true
