@@ -5,8 +5,7 @@
 
 param(
     [Parameter(Mandatory = $false)][string] $Configuration = "Release",
-    [Parameter(Mandatory = $false)][string] $OutputPath = "",
-    [Parameter(Mandatory = $false)][switch] $InstallDotNetSdkLocally
+    [Parameter(Mandatory = $false)][string] $OutputPath = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -21,7 +20,7 @@ if ($OutputPath -eq "") {
     $OutputPath = Join-Path "$(Convert-Path "$PSScriptRoot")" "artifacts"
 }
 
-$installDotNetSdk = $InstallDotNetSdkLocally;
+$installDotNetSdk = $false;
 
 if (($null -eq (Get-Command "dotnet" -ErrorAction SilentlyContinue)) -and ($null -eq (Get-Command "dotnet.exe" -ErrorAction SilentlyContinue))) {
     Write-Host "The .NET SDK is not installed."
