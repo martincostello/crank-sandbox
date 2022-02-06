@@ -25,6 +25,7 @@ jobs:
         script: |
           // Documents all available commands
           const availableBenchmarks = {
+            "microbenchmarks": "Runs the microbenchmarks",
             "root": "Runs the root benchmark"
           };
 
