@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microbenchmarks;
 
+[EventPipeProfiler(BenchmarkDotNet.Diagnosers.EventPipeProfile.CpuSampling)]
 public class ArrayBenchmarks
 {
     [Benchmark]
