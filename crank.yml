@@ -2,6 +2,27 @@ imports:
   - https://raw.githubusercontent.com/dotnet/crank/main/src/Microsoft.Crank.Jobs.Bombardier/bombardier.yml
 
 jobs:
+  microbenchmarks:
+    source:
+      repository: https://github.com/martincostello/crank-sandbox
+      branchOrCommit: main
+      project: src/Microbenchmarks/Microbenchmarks.csproj
+    variables:
+      filterArg: "*"
+      jobArg: short
+    arguments: --job {{jobArg}} --filter {{filterArg}} --memory
+    options:
+      benchmarkDotNet: true
+  microbenchmarks-local:
+    source:
+      localFolder: .
+      project: src/Microbenchmarks/Microbenchmarks.csproj
+    variables:
+      filterArg: "*"
+      jobArg: short
+    arguments: --job {{jobArg}} --filter {{filterArg}} --memory
+    options:
+      benchmarkDotNet: true
   server:
     source:
       repository: https://github.com/martincostello/crank-sandbox
@@ -15,6 +36,12 @@ jobs:
     readyStateText: Application started.
 
 scenarios:
+  microbenchmarks:
+    application:
+      job: microbenchmarks
+  microbenchmarks-local:
+    application:
+      job: microbenchmarks-local
   root:
     application:
       job: server

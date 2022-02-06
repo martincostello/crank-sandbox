@@ -85,7 +85,8 @@ function DotNetPublish {
 }
 
 $publishProjects = @(
-    (Join-Path $solutionPath "src" "CrankSandbox" "CrankSandbox.csproj")
+    (Join-Path $solutionPath "src" "CrankSandbox" "CrankSandbox.csproj"),
+    (Join-Path $solutionPath "src" "Microbenchmarks" "Microbenchmarks.csproj")
 )
 
 Write-Host "Publishing solution..." -ForegroundColor Green

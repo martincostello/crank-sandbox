@@ -1,5 +1,6 @@
 <Project>
   <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.354" />
   </ItemGroup>
