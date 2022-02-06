@@ -12,6 +12,9 @@ profiles:
     arguments: --profile local
 
 benchmarks:
+  microbenchmarks:
+    description: Microbenchmarks
+    arguments: --config ./crank.yml --scenario microbenchmarks
   root:
     description: Root
     arguments: --config ./crank.yml --scenario root
