@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\update-dotnet-sdk.yml = .github\workflows\update-dotnet-sdk.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microbenchmarks", "src\Microbenchmarks\Microbenchmarks.csproj", "{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{E86C1544-75F4-4299-9E61-8E226E7A717E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E86C1544-75F4-4299-9E61-8E226E7A717E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E86C1544-75F4-4299-9E61-8E226E7A717E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{E86C1544-75F4-4299-9E61-8E226E7A717E} = {4553F493-5928-4D81-A846-45D79D82D53E}
 		{F02F1C98-9217-4DD8-91EE-91113EA89017} = {31791CC7-56F1-42A3-9406-CF5E3C77D490}
 		{F8B6A193-66C4-4AEF-B68A-E5E78C8589DA} = {F02F1C98-9217-4DD8-91EE-91113EA89017}
+		{24F79775-5EE5-4D5C-AE47-4C9DB9C9C23F} = {4553F493-5928-4D81-A846-45D79D82D53E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E940B3CA-9435-4038-8A32-586D477A6F6C}
