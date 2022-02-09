@@ -32,7 +32,6 @@ jobs:
       run: |
         dotnet tool install --global Microsoft.Crank.Controller --version "0.2.0-*"
         dotnet tool install --global Microsoft.Crank.Agent --version "0.2.0-*"
-        dotnet tool restore
 
     - name: Run crank
       shell: pwsh

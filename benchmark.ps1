@@ -32,7 +32,7 @@ $components = "sandbox"
 $config = Join-Path $repoPath "benchmark.yml"
 $profiles = "local"
 
-dotnet tool run crank-pr `
+crank-pr `
     --benchmarks $Benchmark `
     --components $components `
     --config $config `
