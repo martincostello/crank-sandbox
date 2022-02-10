@@ -10,8 +10,8 @@ public class StringBenchmarks
     private static readonly char[] TwentySpaces = Enumerable.Repeat(' ', 20).ToArray();
 
     [Benchmark(Baseline = true)]
-    public string ConstructorArray() => new string(TwentySpaces);
+    public string ConstructorArray() => new(TwentySpaces);
 
     [Benchmark]
-    public string ConstructorSpan() => new string(TwentySpaces.AsSpan());
+    public string ConstructorSpan() => new(TwentySpaces.AsSpan());
 }
